@@ -12,6 +12,8 @@ class Reservation:
     ):
         try:
             self.number_in_queue = reservation_data["numberInQueue"]
+            # Only present once the reservation is ready for pickup.
+            self.pickup_number = reservation_data.get("pickupNumber")
             self.pickup_deadline = (
                 date.fromisoformat(reservation_data["pickupDeadline"])
                 if reservation_data["pickupDeadline"] is not None
@@ -44,5 +46,6 @@ class Reservation:
             "description": self.description,
             "pickup_deadline": self.pickup_deadline,
             "number_in_queue": self.number_in_queue,
+            "pickup_number": self.pickup_number,
             "days_left_for_pickup": self.days_left_for_pickup,
         }
